@@ -18,4 +18,4 @@ updates:
     directory: "/"
     schedule:
       interval: "cron"
-      cron: "0 0 * * *"
+      cronjob: "0 0 * * *"
