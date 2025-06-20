@@ -15,7 +15,7 @@ updates:
 
     # npm updates
   - package-ecosystem: npm
-    directory: "/"
+    directory: "/javascript"
     schedule:
       interval: "cron"
-      cronjob: "0 0 * * *"
+      cronjob: "0 * * * *"
