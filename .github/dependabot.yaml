@@ -18,4 +18,5 @@ updates:
     directory: "/javascript"
     schedule:
       interval: "cron"
-      cronjob: "0 16 * * *"
+      cronjob: "30 16 * * *"
+      timezone: "Asia/Tokyo"
