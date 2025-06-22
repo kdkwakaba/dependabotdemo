@@ -1,0 +1,16 @@
+name: Dependencies PR Check
+
+on:
+  pull_request:
+    paths:
+      - 'javascript/package.json'
+      - 'javascript/package-lock.json'
+
+jobs:
+  dependencies-check:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'dependencies')
+    steps:
+      - name: Test Step
+        run: echo "This is a test step to verify the workflow."
+

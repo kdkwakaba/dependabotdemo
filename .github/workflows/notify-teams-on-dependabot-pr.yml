@@ -1,0 +1,20 @@
+name: Notify Teams on Dependabot PR
+
+on:
+  pull_request:
+    types: [opened]
+    branches: [main]
+
+jobs:
+  notify-teams:
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: Send notification to Teams
+        env:
+          TEAMS_WEBHOOK_URL: "https://youngleaves.webhook.office.com/webhookb2/b7decf2d-b4fb-46ea-916c-110f8d0f50e0@ceb04bc3-6342-4672-b6a5-c2863c07e570/IncomingWebhook/b0a734f23d694a1fa03eccc5df633cab/67febd7b-c009-4e02-9c6b-7166ae161b29/V2cJYKyN80OkC5cbj0Uxn6avGjO4TcoPBucURx3t1Aiog1"
+        run: |
+          pr_title="${{ github.event.pull_request.title }}"
+          pr_url="${{ github.event.pull_request.html_url }}"
+          payload="{\"text\": \"Dependabot PR created: <a href='${pr_url}'>${pr_title}</a>\"}"
+          curl -H "Content-Type: application/json" -d "$payload" "$TEAMS_WEBHOOK_URL"
