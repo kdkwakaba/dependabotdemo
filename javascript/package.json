@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "typescript": "^4.0.0",
-    "next": "^13.0.0",
+    "next": "^14.2.30",
     "react": "^18.2.0"
   }
 }
