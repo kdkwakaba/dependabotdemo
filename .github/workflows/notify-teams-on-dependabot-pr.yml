@@ -1,7 +1,6 @@
 name: Notify Teams on Dependabot PR
 
 on:
-  workflow_dispatch:
   pull_request:
     types: [opened]
     branches: [main]
@@ -9,7 +8,7 @@ on:
 jobs:
   notify-teams:
     runs-on: ubuntu-latest
-    #if: github.actor == 'dependabot[bot]'
+    if: github.actor == 'dependabot[bot]'
     steps:
       - name: Send notification to Teams
         env:
@@ -17,5 +16,6 @@ jobs:
         run: |
           pr_title="${{ github.event.pull_request.title }}"
           pr_url="${{ github.event.pull_request.html_url }}"
-          payload="{\"text\": \"Dependabot PR created: <a href='${pr_url}'>${pr_title}</a>\"}"
+          repo_name="${{ github.repository }}"
+          payload="{\"text\": \"Dependabot PR created in ${repo_name}: <a href='${pr_url}'>${pr_title}</a>\"}"
           curl -H "Content-Type: application/json" -d "$payload" "$TEAMS_WEBHOOK_URL"
